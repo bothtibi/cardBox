@@ -1,9 +1,12 @@
 node {
 
   stage 'build'
-  def mvnHome = tool 'maven-3.3.9'
+  def mvn_version = 'M3'
+  withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+    sh "${mvnHome}/bin/mvn clean install"
+  }
 
-  sh "${mvnHome}/bin/mvn clean install"
+
 
 
   stage 'create docker image'
