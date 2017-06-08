@@ -1,13 +1,14 @@
 node {
 
   stage 'build'
+  def mvnHome = tool 'maven-3.3.9'
 
-  sh "mvn clean install"
+  sh "${mvnHome}/bin/mvn clean install"
 
 
   stage 'create docker image'
 
-  sh "mvn clean package docker:build"
+  sh "${mvnHome}/bin/mvn clean package docker:build"
 
   stage 'start the container'
 
